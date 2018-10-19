@@ -7,39 +7,39 @@ read -p "Enter State or Province Name (Full Name): " state
 read -p "Enter Locality Name (City): " city
 read -p "Enter Root Certificate Name: " root
 
-if [ ! -d $HOME/certificates/$root ];
+if [ ! -d $root ];
 then
   sleep 1
   echo
-  echo "Initialize Folder at" $HOME/certificates/$root
+  echo "Initialize Folder at $root"
   sleep 1
-  mkdir -p $HOME/certificates/$root;
+  mkdir $root
   sleep 1
   echo "Folder has been created"
   echo
 fi
 
-if [ -d $HOME/certificates/$root ];
+if [ -d $root ];
 then
   sleep 1
   echo "Creating a" $root.conf "file"
   sleep 1
   cd $HOME/certificates/$root
   touch $root.conf
-  echo [req] >> $HOME/certificates/$root/$root.conf
-  echo default_bits = 4096 >> $HOME/certificates/$root/$root.conf
-  echo default_md = sha256 >> $HOME/certificates/$root/$root.conf
-  echo distinguished_name = subject >> $HOME/certificates/$root/$root.conf
-  echo prompt = no >> $HOME/certificates/$root/$root.conf
-  echo string_mask = utf8only >> $HOME/certificates/$root/$root.conf
-  echo >> $HOME/certificates/$root/$root.conf
-  echo [subject] >> $HOME/certificates/$root/$root.conf
-  echo C = $country >> $HOME/certificates/$root/$root.conf
-  echo ST = $state >> $HOME/certificates/$root/$root.conf
-  echo L = $city >> $HOME/certificates/$root/$root.conf
-  echo O = $name >> $HOME/certificates/$root/$root.conf
-  echo CN = $root.test >> $HOME/certificates/$root/$root.conf
-  echo emailAddress = $email >> $HOME/certificates/$root/$root.conf
+  echo "[req]" >> $root.conf
+  echo "default_bits = 4096" >> $root.conf
+  echo "default_md = sha256" >> $root.conf
+  echo "distinguished_name" = subject >> $root.conf
+  echo "prompt = no" >> $root.conf
+  echo "string_mask = utf8only" >> $root.conf
+  echo >> $root.conf
+  echo "[subject]" >> $root.conf
+  echo "C" = $country >> $root.conf
+  echo "ST" = $state >> $root.conf
+  echo "L" = $city >> $root.conf
+  echo "O" = $name >> $root.conf
+  echo "CN" = $root.test >> $root.conf
+  echo "emailAddress" = $email >> $root.conf
   sleep 1
   echo $root.conf "has been created"
   echo
