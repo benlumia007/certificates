@@ -12,25 +12,25 @@ read -p "Enter Domain Name: " domain
 echo
 sleep 1
 
-if [ ! -d $HOME/certificates/$domain ];
+if [ ! -d $domain ];
 then
-  mkdir -p $HOME/certificates/$domain
-  echo $domain "folder has been generated at" $HOME/certificates/$domain
+  mkdir -p $domain
+  echo "$domain folder has been generated at $HOME/certificates/$domain"
   sleep 1
   echo
 fi
 
-if [ -d $HOME/certificates/$domain ]; then
-    if [ -f $HOME/certificates/$root/$root.conf ]; then
-        cp $HOME/certificates/$root/$root.conf /$HOME/certificates/$domain/$domain.conf
-	echo "The configuration file for" $domain "has been created"
+if [ -d $domain ]; then
+    if [ -f $root/$root.conf ]; then
+        cp $root/$root.conf $domain/$domain.conf
+	echo "The configuration file for $domain has been created"
 	sleep 1
     else
-        echo "The configuration file for" $domain "has not been generated. Please use root.sh to generate a root certificate before proceeding to generate a configuration file."
+        echo "The configuration file for $domain has not been generated. Please use root.sh to generate a root certificate before proceeding to generate a configuration file."
         exit 0
     fi
     echo
-    cd $HOME/certificates/$domain
+    cd $domain
     echo "Generating a" $domain.key
     echo
     openssl genrsa -out $domain.key 4096
