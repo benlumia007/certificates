@@ -11,20 +11,20 @@ if [ ! -d $HOME/certificates/$root ];
 then
   sleep 1
   echo
-  echo Initialize Folder at $HOME/certificates/$root
+  echo "Initialize Folder at" $HOME/certificates/$root
   sleep 1
   mkdir -p $HOME/certificates/$root;
   sleep 1
-  echo Folder has been created
+  echo "Folder has been created"
   echo
 fi
 
 if [ -d $HOME/certificates/$root ];
 then
   sleep 1
-  echo Creating a $root.conf file
+  echo "Creating a" $root.conf "file"
   sleep 1
-  cd $HOME/certificates/$root;
+  cd $HOME/certificates/$root
   touch $root.conf
   echo [req] >> $HOME/certificates/$root/$root.conf
   echo default_bits = 4096 >> $HOME/certificates/$root/$root.conf
@@ -41,17 +41,17 @@ then
   echo CN = $root.test >> $HOME/certificates/$root/$root.conf
   echo emailAddress = $email >> $HOME/certificates/$root/$root.conf
   sleep 1
-  echo $root.conf has been created
+  echo $root.conf "has been created"
   echo
   sleep 1
   openssl genrsa -des3 -out $root.key 4096
   echo
   sleep 1
-  echo Generating a $root.pem
+  echo "Generating a" $root.pem
   sleep 1
   openssl req -config $root.conf -x509 -new -nodes -key $root.key -sha256 -days 3650 -out $root.pem
   sleep 1
   echo
   sleep 1
-  echo $root.pem has been created
+  echo $root.pem "has been created"
 fi
