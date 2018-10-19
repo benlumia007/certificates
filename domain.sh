@@ -8,7 +8,7 @@ echo
 sleep 1
 read -p "Enter Root Certificate Name: " root
 sleep 1
-read -p "Enter Domain Name: " domain
+read -p "Enter Domain Name (Do Not Include TLD): " domain
 echo
 sleep 1
 
