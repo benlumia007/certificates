@@ -5,6 +5,7 @@ read -p "Enter Email Address: " email
 read -p "Enter Country Name (2 Letter Code): " country
 read -p "Enter State or Province Name (Full Name): " state
 read -p "Enter Locality Name (City): " city
+read -p "Enter Common Name (FQDN or Your Name): " fqdn
 read -p "Enter Root Certificate Name: " root
 
 if [ ! -d $root ];
@@ -38,7 +39,7 @@ then
   echo "ST" = $state >> $root.conf
   echo "L" = $city >> $root.conf
   echo "O" = $name >> $root.conf
-  echo "CN" = $root.test >> $root.conf
+  echo "CN" = $fqdn >> $root.conf
   echo "emailAddress" = $email >> $root.conf
   sleep 1
   echo $root.conf "has been created"
