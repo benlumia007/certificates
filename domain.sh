@@ -9,12 +9,12 @@ read -p "Enter Domain Name (Do Not Include TLD): " domain
 echo
 sleep 1
 
-if [ ! -d $domain ];
+if [ ! -d $HOME/certificate/$domain ];
 then
-    mkdir -p $domain
+    mkdir -p $HOME/certificate/$domain
     echo
-    if [ -f $root/$root.conf ]; then
-        cp $root/$root.conf $domain/$domain.conf
+    if [ -f $HOME/certificate/$root/$root.conf ]; then
+        cp $HOME/certificate/$root/$root.conf $HOME/certificate/$domain/$domain.conf
         echo "The configuration file for $domain has been created"
         sleep 1
     else
@@ -22,7 +22,7 @@ then
         exit 0
     fi
     echo
-    cd $domain
+    cd $HOME/certificate/$domain
     echo "Generating a" $domain.key
     echo
     openssl genrsa -out $domain.key 4096
@@ -42,7 +42,7 @@ then
     echo
     echo "Generating a" $domain.crt
     echo 
-    openssl x509 -req -in $domain.csr -CA $HOME/certificates/$root/$root.pem -CAkey $HOME/certificates/$root/$root.key -CAcreateserial -out $domain.crt -days 3650 -sha256 -extfile $domain.ext
+    openssl x509 -req -in $domain.csr -CA $HOME/certificate/$root/$root.pem -CAkey $HOME/certificate/$root/$root.key -CAcreateserial -out $domain.crt -days 3650 -sha256 -extfile $domain.ext
 else
     echo "It has already been generated.";
 fi
