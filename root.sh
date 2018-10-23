@@ -9,27 +9,27 @@ read -p "Enter Common Name (FQDN or Your Name): " fqdn
 read -p "Enter Root Certificate Name: " root
 echo
 
-if [ ! -d $HOME/certificates/$root ];
+if [ ! -d $root ];
 then
   echo "Creating a" $root.conf "file"
   sleep 1
-  mkdir -p $HOME/certificates/$root
-  cd $HOME/certificates/$root
+  mkdir -p $root
+  cd $root
   touch $root.conf
   echo "[req]" >> $root.conf
-  echo "default_bits = 4096" >> $root.conf
-  echo "default_md = sha256" >> $root.conf
-  echo "distinguished_name" = subject >> $root.conf
-  echo "prompt = no" >> $root.conf
-  echo "string_mask = utf8only" >> $root.conf
+  echo "default_bits       = 4096"     >> $root.conf
+  echo "default_md         = sha256"   >> $root.conf
+  echo "distinguished_name = subject"  >> $root.conf
+  echo "prompt             = no"       >> $root.conf
+  echo "string_mask        = utf8only" >> $root.conf
   echo >> $root.conf
   echo "[subject]" >> $root.conf
-  echo "C" = $country >> $root.conf
-  echo "ST" = $state >> $root.conf
-  echo "L" = $city >> $root.conf
-  echo "O" = $name >> $root.conf
-  echo "CN" = $fqdn >> $root.conf
-  echo "emailAddress" = $email >> $root.conf
+  echo "C             = $country" >> $root.conf
+  echo "ST            = $state"   >> $root.conf
+  echo "L             = $city"    >> $root.conf
+  echo "O             = $name"    >> $root.conf
+  echo "CN            = $fqdn"    >> $root.conf
+  echo "emailAddress  = $email"   >> $root.conf
   echo
   sleep 1
   openssl genrsa -des3 -out $root.key 4096

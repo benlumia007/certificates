@@ -1,8 +1,5 @@
 #! /bin/sh
 echo
-echo "initializing..."
-sleep 1
-echo
 echo  "Please note that you should have already generated a root certificate using root.sh before you proceed below."
 echo
 sleep 1
@@ -12,14 +9,12 @@ read -p "Enter Domain Name (Do Not Include TLD): " domain
 echo
 sleep 1
 
-if [ ! -d $HOME/certificates/$domain ];
+if [ ! -d $domain ];
 then
-    mkdir -p $HOME/certificates/$domain
-    echo "$domain folder has been generated at $HOME/certificates/$domain"
-    sleep 1
+    mkdir -p $domain
     echo
-    if [ -f $HOME/certificates/$root/$root.conf ]; then
-        cp $HOME/certificates/$root/$root.conf $HOME/certificates/$domain/$domain.conf
+    if [ -f $root/$root.conf ]; then
+        cp $root/$root.conf $domain/$domain.conf
         echo "The configuration file for $domain has been created"
         sleep 1
     else
@@ -27,7 +22,7 @@ then
         exit 0
     fi
     echo
-    cd $HOME/certificates/$domain
+    cd $domain
     echo "Generating a" $domain.key
     echo
     openssl genrsa -out $domain.key 4096
