@@ -7,24 +7,13 @@ read -p "Enter State or Province Name (Full Name): " state
 read -p "Enter Locality Name (City): " city
 read -p "Enter Common Name (FQDN or Your Name): " fqdn
 read -p "Enter Root Certificate Name: " root
+echo
 
-if [ ! -d $root ];
+if [ ! -d $HOME/certificates/$root ];
 then
-  sleep 1
-  echo
-  echo "Initialize Folder at $root"
-  sleep 1
-  mkdir $root
-  sleep 1
-  echo "Folder has been created"
-  echo
-fi
-
-if [ -d $root ];
-then
-  sleep 1
   echo "Creating a" $root.conf "file"
   sleep 1
+  mkdir -p $HOME/certificates/$root
   cd $HOME/certificates/$root
   touch $root.conf
   echo "[req]" >> $root.conf
@@ -41,18 +30,18 @@ then
   echo "O" = $name >> $root.conf
   echo "CN" = $fqdn >> $root.conf
   echo "emailAddress" = $email >> $root.conf
-  sleep 1
-  echo $root.conf "has been created"
   echo
   sleep 1
   openssl genrsa -des3 -out $root.key 4096
   echo
   sleep 1
-  echo "Generating a" $root.pem
+  echo "Generating a $root.pem"
   sleep 1
   openssl req -config $root.conf -x509 -new -nodes -key $root.key -sha256 -days 3650 -out $root.pem
   sleep 1
   echo
   sleep 1
-  echo $root.pem "has been created"
+  echo "All files has been created at $HOME/certificates/$root"
+else
+  echo "The Root Certificate for $root has been previously created."
 fi
