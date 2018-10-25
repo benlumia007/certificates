@@ -47,9 +47,10 @@ else
     echo "It has already been generated.";
 fi
 
-    if grep -q "SSLCertificate" /etc/apache2/sites-available/$domain.conf; 
-    then
-        sudo sed -i '/SSLCertificate/s/^#//g' /etc/apache2/sites-available/$domain.conf
-        sudo systemctl restart apache2
+if grep -q "SSLCertificate" /etc/apache2/sites-available/$domain.conf; 
+then
+    sudo sed -i '/SSLCertificate/s/^#//g' /etc/apache2/sites-available/$domain.conf
+    a2enmod ssl
+    sudo systemctl restart apache2
     fi
 
