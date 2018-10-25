@@ -9,12 +9,12 @@ read -p "Enter Common Name (FQDN or Your Name): " fqdn
 read -p "Enter Root Certificate Name: " root
 echo
 
-if [ ! -d $HOME/certificate/$root ];
+if [ ! -d $HOME/certificates/$root ];
 then
   echo "Creating a $root.conf file"
   sleep 1
-  mkdir -p $HOME/certificate/$root
-  cd $HOME/certificate/$root
+  mkdir -p $HOME/certificates/$root
+  cd $HOME/certificates/$root
   touch $root.conf
   echo "[req]" >> $root.conf
   echo "default_bits       = 4096"     >> $root.conf
@@ -41,7 +41,7 @@ then
   sleep 1
   echo
   sleep 1
-  echo "All files has been created at $HOME/certificate/$root"
+  echo "All files has been created at $HOME/certificates/$root"
 else
   echo "The Root Certificate for $root has been previously created."
 fi
